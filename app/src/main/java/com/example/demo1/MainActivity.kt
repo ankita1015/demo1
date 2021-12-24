@@ -12,9 +12,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import android.R.attr.phoneNumber
-
-
-
+import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
     lateinit var callUser : Button
@@ -23,9 +21,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var Website :Button
     lateinit var Playstore:Button
     lateinit var sms:Button
+    lateinit var btnLogin:Button
+    lateinit var edtEmail: EditText
+    lateinit var edtPwd:EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btnLogin = findViewById(R.id.btnLogin)
+        edtEmail = findViewById(R.id.edtEmail)
+        edtPwd = findViewById(R.id.edtPwd)
         callUser = findViewById(R.id.btnCallUser)
         Email=findViewById(R.id.btnEmail)
         Gmail = findViewById(R.id.btnGmail)
@@ -36,6 +40,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        btnLogin.setOnClickListener {
+            var intent:Intent = Intent(this,MainActivity2::class.java)
+            intent.putExtra("email",edtEmail.text.toString())
+            intent.putExtra("pwd",edtPwd.text.toString())
+            startActivity(intent)
+        }
 
         Email.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
